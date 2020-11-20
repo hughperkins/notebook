@@ -54,6 +54,7 @@ class FileCheckpoints(FileManagerMixin, Checkpoints):
         src_path = contents_mgr._get_os_path(path)
         dest_path = self.checkpoint_path(checkpoint_id, path)
         self._copy(src_path, dest_path)
+        print('filecheckpoints.py, FileCheckpoints.create_checkpoint', path)
         return self.checkpoint_model(checkpoint_id, dest_path)
 
     def restore_checkpoint(self, contents_mgr, checkpoint_id, path):
@@ -162,6 +163,7 @@ class GenericFileCheckpoints(GenericCheckpointsMixin, FileCheckpoints):
         checkpoint_id = u"checkpoint"
         os_checkpoint_path = self.checkpoint_path(checkpoint_id, path)
         self.log.debug("creating checkpoint for %s", path)
+        print('GenericFileCheckpoints.create_notebook_checkpoint', path)
         with self.perm_to_403():
             self._save_notebook(os_checkpoint_path, nb)
 

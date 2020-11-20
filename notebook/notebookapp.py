@@ -677,6 +677,16 @@ aliases.update({
 
 class NotebookApp(JupyterApp):
 
+    def __init__(self):
+        super().__init__()
+
+        def my_warning_function(message):
+            print(message)
+            raise Exception("dieing on purpose")
+
+        self.log.warning = my_warning_function
+
+
     name = 'jupyter-notebook'
     version = __version__
     description = _("""The Jupyter HTML Notebook.
@@ -2164,6 +2174,7 @@ class NotebookApp(JupyterApp):
         # default_url contains base_url, but so does connection_url
         open_url = self.default_url[len(self.base_url):]
 
+        print('write_browser_open_file', self.browser_open_file)
         with open(self.browser_open_file, 'w', encoding='utf-8') as f:
             self._write_browser_open_file(open_url, f)
 

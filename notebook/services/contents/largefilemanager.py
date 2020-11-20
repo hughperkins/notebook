@@ -11,6 +11,10 @@ class LargeFileManager(FileContentsManager):
     def save(self, model, path=''):
         """Save the file model and return the model with no content."""
         chunk = model.get('chunk', None)
+        print('model', model)
+        import json
+        print(json.dumps(model, indent=2))
+        print('type(model)', type(model))
         if chunk is not None:
             path = path.strip('/')
             

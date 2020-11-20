@@ -162,6 +162,7 @@ class ContentsHandler(APIHandler):
         chunk = model.get("chunk", None) 
         if not chunk or chunk == -1:  # Avoid tedious log information
             self.log.info(u"Saving file at %s", path)  
+        print('ContentsHandler._save type(self.contents_manager)', type(self.contents_manager))
         model = yield maybe_future(self.contents_manager.save(model, path))
         validate_model(model, expect_content=False)
         self._finish_model(model)
